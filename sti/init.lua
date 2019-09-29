@@ -101,7 +101,7 @@ function Map:init(path, plugins, ox, oy)
 		-- Cache images
 		if lg.isCreated then
 			local formatted_path = utils.format_path(path .. tileset.image)
-
+            tileset.imagefile=formatted_path
 			if not STI.cache[formatted_path] then
 				utils.fix_transparent_color(tileset, formatted_path)
 				utils.cache_image(STI, formatted_path, tileset.image)
@@ -887,8 +887,8 @@ function Map:drawObjectLayer(layer)
 
 	assert(layer.type == "objectgroup", "Invalid layer type: " .. layer.type .. ". Layer must be of type: objectgroup")
 
-	local line  = { 160, 160, 160, 255 * layer.opacity       }
-	local fill  = { 160, 160, 160, 255 * layer.opacity * 0.5 }
+	local line  = { 160/255, 160/255, 160/255, layer.opacity       }
+	local fill  = { 160/255, 160/255, 160/255, layer.opacity * 0.5 }
 	local r,g,b,a = lg.getColor()
 	local reset = {   r,   g,   b,   a * layer.opacity       }
 
